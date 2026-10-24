@@ -1,0 +1,21 @@
+# Render "Blueprint": New + > Blueprint > pick your GitHub repo.
+services:
+  - type: web
+    name: team-code-editor
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free            # see README: free = saved code is lost on restart/redeploy
+    healthCheckPath: /api/health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+
+    # To keep saved code permanently, switch to a paid plan (for example
+    # "starter"), uncomment the lines below, and set DATA_DIR:
+    #
+    # disk:
+    #   name: code-data
+    #   mountPath: /var/data
+    #   sizeGB: 1
+    # (and add an env var   DATA_DIR = /var/data   — keep the folder private, the
+    #  Dockerfile already runs user code as a different, unprivileged user)

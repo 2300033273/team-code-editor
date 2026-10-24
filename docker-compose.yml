@@ -1,0 +1,16 @@
+# Run the whole app (with all compilers) locally:  docker compose up --build
+# Then open http://localhost:4000
+services:
+  app:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: 4000
+      JWT_SECRET: change-me-to-a-long-random-string
+    volumes:
+      - code-data:/app/server/data
+    restart: unless-stopped
+
+volumes:
+  code-data:
